@@ -1,0 +1,18 @@
+.page-inner {
+  .content-top {
+    @include ptb();
+    background: lighten($primary,50%);
+  }//content-top
+  .content {
+    @include ptb();
+  }//content
+  // ============================================================
+  //  BOTTOM PROMO
+  // ============================================================
+  .promo-bottom {
+    @include ptb();
+    text-align: center;
+    background: lighten($primary,15%);
+    h2 { color: $white; }
+  }//promo-bottom
+}//.page-inner

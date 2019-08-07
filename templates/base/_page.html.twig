@@ -1,0 +1,120 @@
+<div role="document" class="page main">
+
+  <main role="main">
+    <a id="main-content" tabindex="-1"></a>
+
+    {% if node %}
+      {% set uri = path('entity.node.canonical', {'node': node.id}) %}
+    {% endif %}
+
+    {# this doesn't appear to work at all #}
+    {% if taxonomy_term %}
+      {% set term = path('entity.taxonomy_term.canonical', {'taxonomy_term': id}) %}
+    {% endif %}
+
+    <div class="content-top">
+      <div class="outer-wrapper">
+        <h1 class="node-title">{{ drupal_title() }}</h1>
+      </div>
+    </div>
+
+    {% set break = false %}
+    {% set promo = true %}
+
+    <div class="content">
+      {# SECTION LANDING - START #}
+        {% if node.getType == 'section_landing' %}
+          {% include active_theme_path() ~ '/templates/base/section-landing.html.twig' %}
+          {% set break = true %}
+        {% endif %}
+      {# SECTION LANDING - END #}
+
+      {# BLOG POST - START #}
+        {% if node.getType == 'blog_post' %}
+          {% include active_theme_path() ~ '/templates/base/blog-post.html.twig' %}
+          {% set break = true %}
+          {% set promo = false %}
+        {% endif %}
+      {# BLOG POST - END #}
+
+      {# NON-NODE PAGES (like taxonomy_term) - START #}
+        {% if not node %}
+          {% include active_theme_path() ~ '/templates/base/taxonomy-term--blog-categories.html.twig' %}
+          {% set break = true %}
+          {% set promo = false %}
+        {% endif %}
+      {# NON-NODE PAGES - END #}
+
+      {# BLOG PAGES - START #}
+      {% if uri starts with '/blog' %}
+        {% if node.getType != 'blog_post' %}
+          <div class="page-blog-landing main-right-layout">
+            <div class="outer-wrapper">
+              <div class="content-area">
+                {{ page.content }}
+                {# BLOG LANDING - START #}
+                {% if node.id == 3 %} {# blog landing #}
+                  {{ drupal_view('blog', 'landing_list') }}
+                {% endif %}
+                {# BLOG LANDING - END #}
+              </div>
+              <div class="right">
+                {{ drupal_menu('main',2) }}
+                {% if node.id == 3 %} {# blog landing #}
+                  {% include active_theme_path() ~ '/includes/blog-sidebar.html.twig' %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% set break = true %}
+        {% endif %}
+      {% endif %}
+      {# BLOG PAGES - END #}
+
+      {# COMPANY CHILDREN - START #}
+      {% if uri starts with '/company' %}
+        <div class="page-company-child main-right-layout">
+          <div class="outer-wrapper">
+            <div class="content-area">
+              {{ page.content }}
+              {% if node.id == 13 %} {# news page #}
+                {{ drupal_view('news', 'landing_list') }}
+              {% endif %}
+              {% if node.id == 25 %} {# our team page #}
+                {{ drupal_view('team', 'landing_list') }}
+              {% endif %}
+            </div>
+            <div class="right">
+              {{ drupal_menu('main',2) }}
+            </div>
+          </div>
+        </div>
+        {% set break = true %}
+      {% endif %}
+      {# COMPANY CHILDREN - END #}
+
+      {# DEFAULT VARIANT - START #}
+      {% if break == false %}
+        {% if node %}
+          <div class="page-default-variant main-right-layout">
+            <div class="outer-wrapper">
+              <div class="content-area">
+                {{ page.content }}
+              </div>
+              <div class="right">
+                {{ drupal_menu('main',2) }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+      {# DEFAULT VARIANT - END #}
+
+    </div>
+  </main>
+
+  {#} {% if promo == true %}
+    {% include active_theme_path() ~ '/includes/promo-btm.html.twig' %}
+  {% endif %} #}
+
+</div>

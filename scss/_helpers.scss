@@ -1,0 +1,65 @@
+// ============================================================
+//  BREAKPOINTS
+// ============================================================
+@mixin breakpoint($point) {
+  @if $point == xsmall {
+    @media (max-width: 480px) { @content; }
+  }//small = < 480
+  @if $point == small {
+    @media (max-width: 667px) { @content; }
+  }//small = < 667
+  @else if $point == med {
+    @media (max-width: 768px) { @content; }
+  }//medium = < 768
+  @else if $point == lg {
+    @media (max-width: 890px) { @content; }
+  }//large = < 890
+  @else if $point == xlg {
+    @media (max-width: 1024px) { @content; }
+  }//xlarge = < 1024
+  @else if $point == xxlg {
+    @media (max-width: 1200px) { @content; }
+  }//xxlarge = < 1200
+  @else if $point == xxxlg {
+    @media (min-width: 1430px) { @content; }
+  }//xxxlarge = > 1430
+}//breakpoint
+/* USAGE
+@include breakpoint(xlg) { // XLARGE =================================
+
+}//xlarge
+
+@include breakpoint(lg) { // LARGE =================================
+
+}//large
+
+@include breakpoint(med) { // MEDIUM =================================
+
+}//medium
+
+@include breakpoint(small) { // SMALL ================================
+
+}//small
+
+@include breakpoint(xsmall) { // XSMALL ================================
+
+}//xsmall
+*/
+
+// WIDTH / HEIGHT 100%
+%wh100 {
+  width: 100%;
+  height: 100%
+}//%wh100
+
+// PADDING TOP / BOTTOM
+@mixin ptb($pt:3%,$pb:3%) {
+  padding-top: $pt;
+  padding-bottom: $pb;
+}//@mixin ptb($pt,$pb)
+
+// PADDING LEFT / RIGHT
+@mixin plr($pl:3%,$pr:3%) {
+  padding-left: $pl;
+  padding-right: $pr;
+}//@mixin ptb($pt,$pb)

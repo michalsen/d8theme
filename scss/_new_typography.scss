@@ -1,0 +1,35 @@
+// Defined Fonts
+$sans-serif: "skolar-sans-latin",sans-serif; //tk weights: 100,200,300,400,500,600,700,800,900
+
+// Font Weights
+$light: 100;
+$regular: 300;
+$semibold: 500;
+$bold: 800;
+
+// Base Font
+$base-font-family: $sans-serif;
+$base-font-weight: $regular;
+$base-font-size: 18px;
+$base-line-height: 1.35;
+$base-letter-space: 0.5px;
+
+// Headings Font Sizes
+$header-h1-font-size: 3.625rem; //58px
+$header-h2-font-size: 2.375rem; //38px
+$header-h3-font-size: 1.563rem; //25
+$header-h4-font-size: 1.375rem; //22
+$header-h5-font-size: 1.188rem; //19
+
+// Headlines Font Styles
+$header-font-family: $sans-serif;
+$header-font-weight: $light;
+
+// Call to Action
+$base-cta-font-size: $header-h4-font-size;
+$base-cta-font-family: $sans-serif;
+$base-cta-font-weight: $semibold;
+$base-cta-letter-space: 1.25px;
+
+// Misc Font Sizes
+$base-small-font-size: 14px;

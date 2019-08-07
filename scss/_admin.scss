@@ -1,0 +1,24 @@
+// ============================================================
+//  TABS
+// ============================================================
+#block-sndev-d8-local-tasks {
+  position: fixed;
+  right: 0;
+  bottom: 5%;
+  ul {
+    @extend %ul-zero;
+    li { margin-bottom: 1px; }
+    a {
+      display: block;
+      width: 60px;
+      padding: 4px 10px;
+      background: $secondary;
+      font-size: 0.6rem;
+      text-decoration: none;
+      color: $white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      &:hover { background: lighten($secondary,8%); }
+    }//a
+  }//ul
+}//block-sndev-d8-local-tasks

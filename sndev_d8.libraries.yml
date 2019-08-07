@@ -1,0 +1,13 @@
+global-styling:
+  version: 1.x
+  css:
+    base:
+      css/sndev_d8.min.css: {}
+      css/print.css: { media: print }
+
+global-scripts:
+  version: 1.x
+  js:
+    scripts/min/sndev_d8.min.js: {}
+  dependencies:
+    - core/jquery

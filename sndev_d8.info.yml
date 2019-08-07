@@ -1,0 +1,11 @@
+name: sndev_d8
+description: Straight North custom theme for Drupal 8
+type: theme
+core: 8.x
+
+libraries:
+  - sndev_d8/global-styling
+  - sndev_d8/global-scripts
+
+stylesheets-remove:
+  -"css_ii6L6bOiDqlk91j93JXc-ACQOIi86JDVxFZEDuU8cJI.css"

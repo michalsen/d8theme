@@ -1,0 +1,7 @@
+.right {
+  .menu {
+    ul {
+      @extend %ul-zero;
+    }
+  }
+}//right

@@ -1,0 +1,20 @@
+{# DEFAULT TAXONOMY - START #}
+{% if break == false %}
+<div class="page-default-variant main-right-layout">
+  <div class="outer-wrapper">
+    <div class="inner-wrapper">
+      <div class="content-area">
+        <h4>This is term id: {{ term.id }}<br>
+        and term Name: {{ term.name.value }}</h4>
+        <p>{{ content.description }}</p>
+      </div>
+      <div class="right">
+        <div class="menu main">
+          {{ drupal_menu('main',1) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{# DEFAULT TAXONOMY - END #}

@@ -1,0 +1,85 @@
+<div role="document" class="page page-inner main">
+
+  <main role="main">
+    <a id="main-content" tabindex="-1"></a>
+
+    {% if node %}
+      {% set uri = path('entity.node.canonical', {'node': node.id}) %}
+    {% endif %}
+
+    <div class="content-top">
+      <div class="outer-wrapper">
+        <div class="inner-wrapper">
+          <h1 class="node-title">{{ drupal_title() }}</h1>
+        </div>
+      </div>
+    </div>
+
+    {% set break = false %}
+    {% set promo = true %}
+
+    <div class="content">
+
+      {# DEFAULT VARIANT - START #}
+      {% if break == false %}
+        {% if node %}
+          <div class="page-default-variant main-right-layout">
+            <div class="outer-wrapper">
+              <div class="inner-wrapper">
+                <div class="content-area">
+                  {{ page.content }}
+                  NODE PAGE
+                </div>
+                <div class="right">
+                  <div class="menu main">
+                    {{ drupal_menu('main',1) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% set break = true %}
+        {% endif %}
+      {% endif %}
+      {# DEFAULT VARIANT - END #}
+
+      {# DEFAULT VARIANT - START #}
+      {% if break == false %}
+        {% if not node %}
+          {{ page.content }}
+          {% set break = true %}
+        {% endif %}
+      {% endif %}
+      {# DEFAULT VARIANT - END #}
+
+      {# USER - START #}
+      {% if break == false %}
+        {% if user %}
+          <div class="page-default-variant main-right-layout">
+            <div class="outer-wrapper">
+              <div class="inner-wrapper">
+                <div class="content-area">
+                  {{ page.content }}
+                  DEFAULT
+                </div>
+                <div class="right">
+                  <div class="menu main">
+                    {{ drupal_menu('administration',1) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% set break = true %}
+        {% endif %}
+      {% endif %}
+      {# USER PAGE - END #}
+
+    </div>
+  </main>
+
+  {% if promo == true %}
+    {% include active_theme_path() ~ '/includes/promo-btm.html.twig' %}
+  {% endif %}
+
+</div>

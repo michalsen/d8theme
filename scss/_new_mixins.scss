@@ -1,0 +1,236 @@
+// *****************************************
+// MIXINS
+// *****************************************
+
+
+// =========================================
+// BREAKPOINT
+// =========================================
+@mixin breakpoint($point) {
+	@if $point == xs {
+    @media (min-width: $viewport-xs) { @content; }
+  }
+  @if $point == sm {
+    @media (min-width: $viewport-sm) { @content; }
+  }
+  @else if $point == md {
+    @media (min-width: $viewport-md) { @content; }
+  }
+  @else if $point == lg {
+    @media (min-width: $viewport-lg) { @content; }
+  }
+}//mixin: breakpoint
+
+// =========================================
+// INSIDE WRAP
+// =========================================
+@mixin inside($display:block) {
+	max-width: $viewport-lg;
+	width: auto;
+	position: relative;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	@if $display == "flex" {display: flex;}
+}//mixin: inside
+
+// =========================================
+// LIST - CHILDREN MIXINS 
+// these mixin children are pulled into the parent below
+// =========================================
+@mixin list-bullet {
+	li {list-style-type: disc;}
+	li li {list-style-type: circle;}
+	li li li {list-style-type: circle;}
+}//mixin: list-bullet
+
+@mixin list-checkmark {
+	li {
+		display: block;
+		list-style-type: none;
+		position: relative;
+		min-height: 30px;
+		padding-left: 38px;
+		margin-bottom: $base-margin;
+		margin-left: 0;
+		&:before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 2px;
+			left: 0;
+			background-image: url(../img/svg/checkmark.svg);
+			background-repeat: no-repeat;
+			background-size: contain;
+			width: 28px;
+			height: 28px;
+		}
+	}
+}//mixin: list-checkmark
+
+@mixin list-question {
+	li {
+		display: block;
+		list-style-type: none;
+		position: relative;
+		min-height: 30px;
+		padding-left: 38px;
+		margin-bottom: $base-margin;
+		margin-left: 0;
+		font-style: italic;
+		&:before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 2px;
+			left: 0;
+			background-image: url(../img/svg/question.svg);
+			background-repeat: no-repeat;
+			background-size: contain;
+			width: 28px;
+			height: 28px;
+		}
+	}
+}//mixin: list-question
+
+@mixin list-number {
+	li {list-style-type: decimal;}
+	li li {list-style-type: upper-alpha;}
+	li li li {list-style-type: square;}
+}//mixin: list-number
+
+@mixin list-inline {
+	li {
+		list-style-type: none;
+		display: inline-block;
+		margin: 0 0 0 0.625rem;
+		&:first-child {margin-left: 0;}
+	}
+}//mixin: list-inline
+
+@mixin list-block {
+	li {
+		display: block;
+		margin-bottom: 0;
+		margin-left: 0;
+		ul {
+			margin-bottom: 0;
+			padding-top: 0;
+			li {margin-left: 0;}
+		}
+	}
+} //mixin: list-block
+
+
+// =========================================
+// LIST PARENT
+// mixin children above are pulled into this
+// =========================================
+@mixin list($list-type:bullet) {
+  display: block;
+	clear: both;
+	margin: 0 0 $base-margin 0;
+	padding: 0;
+	li {
+		margin: 0 0 0.625rem 2.188rem;
+		padding: 0;
+		position: relative;
+		&:last-child {margin-bottom: 0;}
+		ul,ol {
+			margin-bottom: $base-margin / 2;
+			padding-top: $base-margin / 2;
+			li {margin-left: 0.938rem;}
+		}
+	}
+  @if $list-type == "bullet" {
+		@include list-bullet;
+ 	}
+  @if $list-type == "checkmark" {
+		@include list-checkmark;
+ 	}
+  @if $list-type == "question" {
+		@include list-question;
+ 	}
+	@else if $list-type == "number" {
+		@include list-number;
+ 	} 
+	@else if $list-type == "inline" {
+		@include list-inline;
+	}
+	@else if $list-type == "block" {
+		@include list-block;
+	}
+	@else if $list-type == "" {
+		list-style-type: none;
+	}
+}//mixin: list-variables
+
+// =========================================
+// TRANSITION
+// =========================================
+@mixin transition($length:0.3s) {
+	transition-property: all;
+	transition-timing-function: ease-in-out;
+	transition-duration: $length;
+}//mixin: transition
+
+// =========================================
+// BUTTONS
+// =========================================
+@mixin button($size:Med) {
+	display: inline-block;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	appearance: none;
+	text-align: center;
+	border-radius: 0;
+	line-height: 1.1;
+	text-decoration: none;
+	font-size: $base-cta-font-size;
+	font-family: $base-cta-font-family;
+	font-weight: $base-cta-font-weight;
+	padding: 1.250rem 2.625rem 1.438rem;
+	background: $base-cta-background;
+	color: $base-cta-text;
+	letter-spacing: $base-cta-letter-space;
+	&:hover {
+		text-decoration: none;
+		background:darken($base-cta-background,10%);
+		color: $base-cta-text;
+	}
+	
+	@if $size == 'Sm' {
+		font-weight: $regular;
+		font-size:1.125rem;
+		padding: 0.875rem 1.375rem 1rem;
+	}
+	
+	@else if $size == 'Med' {
+		//default
+	} 
+	
+	@else if $size == 'Lg' {
+		//currently not used
+	}
+	
+}//mixin: button
+
+// =========================================
+// IMAGES
+// =========================================
+@mixin img($style:Inline) {
+	border: 0;
+	outline: none;
+	height: auto;
+	@if $style == 'Inline' {
+		display: inline;
+		width: auto;
+		max-width: 100%;
+	}//inline
+	@else if $style == 'Block'{
+		display: block;
+		width: 100%;
+		max-width: none;
+	}//block
+}//images
